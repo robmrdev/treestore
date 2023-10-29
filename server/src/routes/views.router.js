@@ -6,7 +6,7 @@ const router = Router()
 const productManager = new ProductManager
 
 router.get('/realTimeProducts', async (req,res)=>{
-    const { page = 1, limit = 5, query = '', sort = '' } = req.query;
+    const { page = 1, limit = 6, query = '', sort = ''} = req.query;
     
     let sortOption = {};
     if (sort === 'asc' || sort === 'desc') {

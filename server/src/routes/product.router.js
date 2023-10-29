@@ -6,8 +6,23 @@ import ProductManager from "../dao/managers/product.manager.js";
 const router = Router()
 const productManager = new ProductManager
 
+router.put('/updatedesc/:id', async (req,res)=>{
+    try {
+        const {id} = req.params;
+        const {largeDescription} = req.body;
+        // console.log(id)
+        const updatedProduct = await productManager.addDesc(id,largeDescription)
+        if (updatedProduct) {
+            res.send({ status: 'success', payload: updatedProduct });
+          } else {
+            res.status(404).send({ status: 'error', message: 'Producto no encontrado' });
+          }
+    } catch (error) {
+        res.status(500).send({ status: 'error', message: 'Error en el servidor' });
+    }
+}),
 router.get('/getproducts', async (req, res) => {
-    const { page = 1, limit = 5, query = '', sort = '' } = req.query;
+    const { page = 1, limit = 9999, query = '', sort = '', subCat = ''} = req.query;
 
     let sortOption = {};
     if (sort === 'asc' || sort === 'desc') {
@@ -15,10 +30,10 @@ router.get('/getproducts', async (req, res) => {
     } else {
         sortOption = {};
     }
-
+    const subCatRef = decodeURIComponent(subCat).replace(/_/g, " ").replace(/and/g, "&");
     try {
         const queryObj = query ? { category: query } : {};
-
+        if (subCatRef != '') queryObj.subCategory = subCatRef
         const { docs, hasPrevPage, hasNextPage, nextPage, prevPage } = await productModel.paginate(queryObj, { limit, page, lean: true, sort: sortOption });
 
         function getCategories(products) {
@@ -30,7 +45,6 @@ router.get('/getproducts', async (req, res) => {
             });
             return categories;
         }
-
         const products = await productManager.getAll();
         const allCategories = getCategories(products);
         const productData = docs.map(prod => {
@@ -44,7 +58,8 @@ router.get('/getproducts', async (req, res) => {
                 category: prod.category,
                 colorCode: prod.colorCode,
                 color: prod.color,
-                thumbnail: prod.thumbnail
+                thumbnail: prod.thumbnail,
+                subCategory: prod.subCategory
             };
         });
         const payload = {
@@ -60,7 +75,17 @@ router.get('/getproducts', async (req, res) => {
             sort,
             allCategories,
         }
-        res.send({ status: 'succes', payload: productData })
+        res.send({ status: 'succes', payload: payload })
+    } catch (error) {
+        console.error(error.message)
+    }
+})
+
+router.get('/getProduct/:title',async (req,res)=>{
+    const { title } = req.params
+    const product = await productManager.getOneByTittle(title)
+    try {
+        res.send({ status: 'success', payload: product[0] })
     } catch (error) {
         console.error(error.message)
     }
@@ -69,7 +94,7 @@ router.get('/getproducts', async (req, res) => {
 router.get('/getAllProducts', async (req,res)=>{
     const products = await productManager.getAll();
     try {
-        res.send({ status: 'succes', payload: products })
+        res.send({ status: 'success', payload: products })
     } catch (error) {
         console.error(error.message)
     }
