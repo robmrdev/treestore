@@ -1,0 +1,63 @@
+.productAndFilters {
+    display: flex;
+    margin: 2rem
+}
+
+.productListFilters {
+    min-width: 16.6666%;
+}
+
+.productCard {
+    grid-column: span 2;
+    display: flex;
+    flex-direction: column;
+    color: rgb(17 24 39)
+}
+
+.productCard img {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.cardInfo {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+
+.cardRight {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.cardButtons {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+
+.cardButtons>div {
+    display: flex;
+}
+
+.colorSelector {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin: 0 5px;
+
+    background-color: linear-gradient(to left bottom, rgb(152, 160, 165) 50%, rgb(42, 40, 40) 50%)
+}
+
+.productListContainer {
+    display: grid;
+    max-width: 1400px;
+    grid: auto/repeat(6, 1fr);
+    grid-gap: 10px;
+}
+
+.pageButtons {
+    margin: 0 auto;
+    width: fit-content;
+}

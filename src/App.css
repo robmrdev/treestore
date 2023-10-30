@@ -1,0 +1,15 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none; 
+}
+main{
+    margin-top: 113px;
+    background-color: rgb(244 244 242);
+    font-family: 'Recoleta', sans-serif;
+    min-height: calc(100vh - 113.5px);
+}
+a{
+    color: rgb(17 24 39)
+}

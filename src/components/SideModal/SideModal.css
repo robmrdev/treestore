@@ -1,0 +1,45 @@
+.sideModal{
+    position: fixed;
+    z-index: 99;
+    font-family: 'Recoleta', sans-serif;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+.sideContainer{
+    z-index: 100;
+    position: absolute;
+    width: fit-content;
+    top: 113.5px;
+    right: 0;
+    height: calc(100vh - 113.5px);
+    background-color: rgb(238 238 233/0.90);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+}
+.sideContainer>div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 40%;
+}
+.sideContainer>div h3{
+    margin-bottom: 1rem;
+    font-size: 1.7rem;
+    line-height: 2rem;
+    text-transform: capitalize;
+}
+.sideContainer>div ul{
+    list-style: none;
+}
+.sideContainer>div ul li{
+    margin-bottom: 0.75rem;
+    font-size: 18px;
+}
+.sideContainer>img{
+    padding: 1.5rem;
+    padding-bottom: 0;
+}

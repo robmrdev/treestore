@@ -1,0 +1,8 @@
+.ProductCategorySelectorTop{
+    display: flex;
+    overflow: hidden;
+    width: fit-content;
+}
+.ProductCategorySelectorTop>img{
+    width: 300px;
+}

@@ -1,0 +1,152 @@
+.mainLoginContainer{
+    margin: 0 2rem;
+    width: 100%;
+    display: flex
+}
+.mainContainerLeft{
+    width: 100%;
+    max-width: 32rem;
+    margin: 2.5rem 2rem;
+    margin-left: 0;
+}
+.mainContainerLeft h1{
+    text-align: center;
+    margin-bottom: 4rem;
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    font-weight: 700;
+}
+.mainContainerLeft>div{
+    padding-left: 20px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 40px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    color: white;
+    font-size: 14px;
+}
+.mainContainerLeft i{
+    height: 40px;
+    line-height: 40px;
+    width: 40px;
+    text-align: center;
+    font-size: 30px;
+    border-radius: 0px 4px 4px 0px;
+}
+.loginFacebook{
+    background-color: #3b5998
+}
+.loginFacebook i{
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.loginGoogle{
+    background-color: #dd4b39;
+}
+.loginGoogle i{
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.loginAmazon{
+    background-color: #ff9900;
+}
+.loginAmazon i{
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.mainContainerLeft form{
+    padding-top: 5px;
+}
+.loginInputs{
+    display: flex;
+    flex-direction: column;
+}
+.loginInputs input{
+    margin-bottom: 1.5rem;
+    padding: 0.75rem;
+    border: 0 solid #e5e7eb;
+    border-color: rgb(195 195 192);
+    border-width: 1px;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    border-width: 1px;
+    width: 100%;
+    color: #424242;
+}
+.passwordWrapper{
+    position: relative;
+}
+.passwordWrapper input{
+    padding-left: 2.25rem;;
+}
+
+.passwordWrapper .bx{
+    position: absolute;
+    color: #424242;
+}
+.passwordWrapper .bx-low-vision{
+    right: 0.5rem;
+}
+.mainContainerLeft button{
+    background-color: #516559;
+    color: #eeeee9;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 0.75rem;
+    border: 0 solid #e5e7eb;
+    margin-top: 1rem;
+}
+.loginBottom{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+.loginBottom{
+    font-size: 15px;
+}
+.loginBottom>div>div{
+    display: flex;
+    margin-top: 0.5rem;
+}
+.loginBottom>div>div p{
+    font-weight: 700;
+}
+
+
+.mainContainerRight{
+    padding: 2rem;
+    margin: 2.5rem auto;
+    background-color: rgb(81 101 89);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    color: rgb(238 238 233)
+}
+.mainContainerRight img{
+    margin: 2rem auto;
+    margin-top: 0;
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+}
+.mainContainerRight h3{
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    margin-bottom: 1rem;
+}
+.mainContainerRight p{
+    margin-bottom: 1rem;
+    line-height: 22.5px;
+}
+.mainContainerRight .arrowIcon{
+    height: 1.5rem;
+    width: 1.5rem;
+    mask-size: cover;
+    -webkit-mask-size: cover;
+    mask-image: url(./img/resources/arrow-tree-right.svg);
+    -webkit-mask-image: url(./img/resources/arrow-tree-right.svg);
+    background-color: #424242;
+    --tw-invert: invert(100%);
+    margin: 0;
+}

@@ -1,0 +1,39 @@
+.treeCounterContainer {
+    padding: 6rem 1rem;
+    background-color: rgb(81 101 89);
+    color: rgb(238 238 233);
+    text-align: center;
+}
+
+.treeCounterContainer h2 {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+}
+
+.treeCount {
+    font-size: 8rem;
+    line-height: 1;
+    padding: 2rem 0;
+    letter-spacing: .25em;
+}
+
+.treeCounterContainer p {
+    margin-bottom: 3rem;
+}
+
+.treeCounterContainer{
+    margin-top: 4rem;
+}
+.treeCounterContainer small {
+    font-size: 12px;
+    letter-spacing: .14em;
+    line-height: 1.5rem;
+}
+
+.treeCounterContainer .arrowIcon {
+    background-color: rgb(228 228 223/1);
+    -webkit-mask-image: url(./img/resources/arrow-tree-right2.svg);
+    mask-image: url(./img/resources/arrow-tree-right2.svg);
+    -webkit-mask-size: cover;
+    mask-size: cover;
+}

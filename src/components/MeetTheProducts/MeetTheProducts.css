@@ -1,0 +1,34 @@
+.meetProductsContainer{
+    margin: 0 2rem;
+    color: #424242;
+    padding-bottom: 2rem;
+}
+.meetProductsContainer h2{
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    margin-bottom: 2.5rem
+}
+.meetProducts{
+    display: flex;
+    gap: 1rem;
+    padding-top: 1rem
+}
+.meetProductCard{
+
+    max-width: 25%;
+}
+.meetProductCard>img{
+    width: 100%;
+    margin-bottom: 1.25rem;
+    box-shadow: 5px 10px 30px -8px #bbb;
+}
+.meetProductInfo{
+    display: flex;
+    align-items: center;
+    margin-left: 0.5rem;
+    text-transform: capitalize;
+}
+.arrowIcon{
+    width: 24px;
+    margin-left: 0.5rem;
+}

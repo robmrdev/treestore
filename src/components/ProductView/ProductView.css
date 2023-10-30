@@ -1,0 +1,80 @@
+.productViewContainer{
+    display: flex;
+    padding-top: 65px;
+}
+.productViewImages{
+    width: 50%;
+    height: 1000px;
+    overflow: auto;
+}
+.productViewImages img{
+    width: 100%;
+}
+.productViewInfo{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    padding: 1.25rem 2.25rem;
+}
+.productViewInfo h4{
+    font-size: 22px;
+    padding-bottom: 5px;
+}
+.productViewHeader{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+    padding: 5px 0;
+}
+/* .productViewTitleAndDesc{
+    gap: 5px;
+} */
+.productViewTitleAndDesc span{
+    font-size: 15px;
+}
+.productViewPrice{
+    font-size: 18px;
+}
+.productViewRate{
+    padding: 7px 0;
+}
+.colorOptions{
+    margin-top: 0.75rem;
+    margin-bottom: 1rem;
+    padding-bottom: 2rem;
+}
+.colorOptions span{
+    display: flex;
+    padding: 8px 0;
+}
+.productViewButtons{
+    display: flex;
+    gap: 2px;
+}
+.productViewButtons div{
+    background-color: #516559;
+    color: #eeeee9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.productViewAdd{
+    width: 100%;
+    letter-spacing: .25em;
+    font-weight: 700;
+    font-size: 12px;
+    padding: 0.8rem 0;
+}
+.productViewHeart{
+    margin-top: 2px;
+    padding: 0.5rem;
+    font-size: 24px;
+}
+
+
+
+
+
+.productViewDescriptionUpdate{
+    justify-self: flex-end;
+}
