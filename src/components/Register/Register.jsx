@@ -13,7 +13,7 @@ const Register = () => {
         console.log("DATOS");
         console.log(datos);
 
-        const respuesta = await fetch('http://localhost:8080/api/auth/register', {
+        const respuesta = await fetch('https://treestoreback.up.railway.app/api/auth/register', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

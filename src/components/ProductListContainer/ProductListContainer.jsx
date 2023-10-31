@@ -14,7 +14,7 @@ const ProductListContainer = ({ actualPage, setActualPage }) => {
     }, [limit, actualPage, subCatRef, subCat, collection]);
     const fetchData = async () => {
         try {
-            const response = await fetch(`http://localhost:8080/getproducts?query=${collection}&limit=${limit}&page=${actualPage}&subCat=${(subCat != undefined) ? subCat : ''}`)
+            const response = await fetch(`https://treestoreback.up.railway.app/getproducts?query=${collection}&limit=${limit}&page=${actualPage}&subCat=${(subCat != undefined) ? subCat : ''}`)
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -27,7 +27,7 @@ const ProductListContainer = ({ actualPage, setActualPage }) => {
     // const deleteItem = async (e) => {
     //     const productId = e.currentTarget.getAttribute('data-product-id');
     //     try {
-    //         const response = await fetch(`http://localhost:8080/deleteProduct/${productId}`, {
+    //         const response = await fetch(`https://treestoreback.up.railway.app/deleteProduct/${productId}`, {
     //             method: 'DELETE',
     //         });
 

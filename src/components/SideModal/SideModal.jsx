@@ -16,7 +16,7 @@ const SideModal = ({isOpen,onClose}) => {
   };
   const fetchData = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/auth/private', {
+      const response = await fetch('https://treestoreback.up.railway.app/api/auth/private', {
         method: 'GET',
         headers: {
           'authorization': `Bearer ${localStorage.getItem('access_token')}`

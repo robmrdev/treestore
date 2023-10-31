@@ -17,7 +17,7 @@ const AddProductForm = () => {
         event.preventDefault();
 
         try {
-            const response = await fetch('http://localhost:8080/createProduct', {
+            const response = await fetch('https://treestoreback.up.railway.app/createProduct', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

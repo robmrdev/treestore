@@ -10,7 +10,7 @@ const ProductView = () => {
     }, []);
     const fetchData = async () => {
         try {
-            const response = await fetch(`http://localhost:8080/getProduct/${title}`)
+            const response = await fetch(`https://treestoreback.up.railway.app/getProduct/${title}`)
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -28,7 +28,7 @@ const ProductView = () => {
     }
     const handleUpdateDescription = async () => {
         try {
-            const response = await fetch(`http://localhost:8080/updatedesc/${product._id}`, {
+            const response = await fetch(`https://treestoreback.up.railway.app/updatedesc/${product._id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

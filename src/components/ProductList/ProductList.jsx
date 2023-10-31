@@ -13,7 +13,7 @@ const ProductList = ({ products, query, nextPage, prevPage, hasPrevPage, hasNext
 
     const fetchData = async () => {
         try {
-            const response = await fetch(`http://localhost:8080/getproducts?query=${query}`)
+            const response = await fetch(`https://treestoreback.up.railway.app/getproducts?query=${query}`)
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
