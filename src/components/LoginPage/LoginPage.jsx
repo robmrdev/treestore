@@ -1,4 +1,5 @@
 import './LoginPage.css'
+import urlBack from '../../assets/utils.js'
 
 const LoginPage = () => {
 const handleLogin = async e => {
@@ -11,7 +12,7 @@ const handleLogin = async e => {
     password: formLogin[1].value,
   }
 
-  const respuesta = await fetch('https://treestoreback.up.railway.app/api/auth/login', {
+  const respuesta = await fetch(`${urlBack}api/auth/login`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',

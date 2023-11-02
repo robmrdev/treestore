@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import './SideCart.css'
 import { useEffect, useState } from 'react';
+import urlBack from '../../assets/utils.js';
 
 const SideCart = ({ cartOpen, cartClose }) => {
     const [user, setUser] = useState()
@@ -12,7 +13,7 @@ const SideCart = ({ cartOpen, cartClose }) => {
 
     const fetchData = async () => {
         try {
-            const response = await fetch(`https://treestoreback.up.railway.app/getproducts?query=accesories`)
+            const response = await fetch(`${urlBack}getproducts?query=accesories`)
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }

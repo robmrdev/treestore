@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import urlBack from '../../assets/utils.js';
 
 const AddProductForm = () => {
     const [formData, setFormData] = useState({
@@ -17,7 +18,7 @@ const AddProductForm = () => {
         event.preventDefault();
 
         try {
-            const response = await fetch('https://treestoreback.up.railway.app/createProduct', {
+            const response = await fetch(`${urlBack}createProduct`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './SideModal.css'
+import urlBack from '../../assets/utils.js';
 
 const SideModal = ({isOpen,onClose}) => {
   const [user, setUser] = useState()
@@ -16,7 +17,7 @@ const SideModal = ({isOpen,onClose}) => {
   };
   const fetchData = async () => {
     try {
-      const response = await fetch('https://treestoreback.up.railway.app/api/auth/private', {
+      const response = await fetch(`${urlBack}api/auth/private`, {
         method: 'GET',
         headers: {
           'authorization': `Bearer ${localStorage.getItem('access_token')}`

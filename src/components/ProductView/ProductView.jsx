@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import './ProductView.css'
+import urlBack from '../../assets/utils.js'
 
 const ProductView = () => {
     const { title } = useParams()
@@ -10,7 +11,7 @@ const ProductView = () => {
     }, []);
     const fetchData = async () => {
         try {
-            const response = await fetch(`https://treestoreback.up.railway.app/getProduct/${title}`)
+            const response = await fetch(`${urlBack}getProduct/${title}`)
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -28,7 +29,7 @@ const ProductView = () => {
     }
     const handleUpdateDescription = async () => {
         try {
-            const response = await fetch(`https://treestoreback.up.railway.app/updatedesc/${product._id}`, {
+            const response = await fetch(`${urlBack}updatedesc/${product._id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -99,7 +100,7 @@ const ProductView = () => {
                         </div>
 
 
-                        <div className='productViewDescriptionUpdate'>
+                        {/* <div className='productViewDescriptionUpdate'>
                             <h4>Update Description</h4>
                             <textarea
                                 rows="4"
@@ -109,7 +110,7 @@ const ProductView = () => {
                                 placeholder="Enter new description"
                             />
                             <button onClick={handleUpdateDescription}>Update Description</button>
-                        </div>
+                        </div> */}
 
 
                     </div>

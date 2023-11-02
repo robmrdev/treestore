@@ -9,6 +9,11 @@ const NavBar = ({setActualPage, openMenu, openCart, closeMenu, closeCart}) => {
     const [menuCategory, setMenuCategory] = useState('default')
     const [subMenu, setSubMenu] = useState('hidden')
 
+    
+    const handlePage = (newPage)=>{
+        setActualPage(newPage)
+    }
+
     function handleMouseEnter(e) {
         setSubMenu('visible');
         setMenuCategory(e)
@@ -38,10 +43,10 @@ const NavBar = ({setActualPage, openMenu, openCart, closeMenu, closeCart}) => {
                 <div>
                     <NavLink to="/"><img src="/img/logo.svg" alt="" onMouseEnter={handleMouseLeave} /></NavLink>
                     <ul>
-                        <li onMouseEnter={() => handleMouseEnter('womens')}><NavLink to="/collections/womens">Womens</NavLink></li>
-                        <li onMouseEnter={() => handleMouseEnter('mens')}><NavLink to='/collections/mens'>Mens</NavLink></li>
-                        <li onMouseEnter={() => handleMouseEnter('kids')}><NavLink to='/collections/kids'>Kids</NavLink></li>
-                        <li onMouseEnter={() => handleMouseEnter('accesories')}><NavLink to='/collections/accesories'>Accesories</NavLink></li>
+                        <li onMouseEnter={() => handleMouseEnter('womens')}><NavLink to="/collections/womens" onClick={()=>handlePage('1')}>Womens</NavLink></li>
+                        <li onMouseEnter={() => handleMouseEnter('mens')} onClick={()=>handlePage('1')}><NavLink to='/collections/mens'>Mens</NavLink></li>
+                        <li onMouseEnter={() => handleMouseEnter('kids')} onClick={()=>handlePage('1')}><NavLink to='/collections/kids'>Kids</NavLink></li>
+                        <li onMouseEnter={() => handleMouseEnter('accesories')} onClick={()=>handlePage('1')}><NavLink to='/collections/accesories'>Accesories</NavLink></li>
                     </ul>
                 </div>
                 <div onMouseEnter={handleMouseLeave}>
@@ -53,7 +58,7 @@ const NavBar = ({setActualPage, openMenu, openCart, closeMenu, closeCart}) => {
                     <i className='bx bx-menu' onClick={handleMenuOpen}></i>
                 </div>
             </nav>
-            <NavBarSubMenu visib={subMenu} cat={menuCategory} isOpen={subMenuOpen} restartPage={setActualPage}/>
+            <NavBarSubMenu visib={subMenu} cat={menuCategory} isOpen={subMenuOpen} restartPage={handlePage}/>
         </header>
     )
 }

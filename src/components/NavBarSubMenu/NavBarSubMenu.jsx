@@ -1,6 +1,7 @@
 import './NavBarSubMenu.css'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import urlBack from '../../assets/utils.js'
 
 const NavBarSubMenu = (props) => {
     const navigate = useNavigate()
@@ -25,7 +26,7 @@ const NavBarSubMenu = (props) => {
     
     const fetchData = async () => {
         try {
-            const response = await fetch('https://treestoreback.up.railway.app/getAllProducts')
+            const response = await fetch(`${urlBack}getAllProducts`)
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }

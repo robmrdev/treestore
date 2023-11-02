@@ -3,18 +3,20 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import ProductList from '../ProductList/ProductList';
 import ProductListCategoryTop from '../ProductListCategoryTop/ProductListCategoryTop';
+import urlBack from '../../assets/utils.js';
 
 const ProductListContainer = ({ actualPage, setActualPage }) => {
     const { collection, subCat } = useParams();
     const [listProducts, setListProducts] = useState([])
     const [subCatRef, setSubCatRef] = useState(subCat)
     const [limit, setLimit] = useState('6')
+    
     useEffect(() => {
         fetchData();
-    }, [limit, actualPage, subCatRef, subCat, collection]);
+    }, [limit, actualPage, subCatRef, collection, subCat]);
     const fetchData = async () => {
         try {
-            const response = await fetch(`https://treestoreback.up.railway.app/getproducts?query=${collection}&limit=${limit}&page=${actualPage}&subCat=${(subCat != undefined) ? subCat : ''}`)
+            const response = await fetch(`${urlBack}getproducts?query=${collection}&limit=${limit}&page=${(actualPage != undefined)? actualPage : 1}&subCat=${(subCat != undefined) ? subCat : ''}`)
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -24,10 +26,11 @@ const ProductListContainer = ({ actualPage, setActualPage }) => {
             console.error('Error:', error);
         }
     }
+
     // const deleteItem = async (e) => {
     //     const productId = e.currentTarget.getAttribute('data-product-id');
     //     try {
-    //         const response = await fetch(`https://treestoreback.up.railway.app/deleteProduct/${productId}`, {
+    //         const response = await fetch(`${urlBack}deleteProduct/${productId}`, {
     //             method: 'DELETE',
     //         });
 
@@ -42,10 +45,12 @@ const ProductListContainer = ({ actualPage, setActualPage }) => {
     //         console.error('Error al realizar la solicitud:', error);
     //     }
     // }
+    
     const { product, hasPrevPage, hasNextPage, prevPage, nextPage } = listProducts
+    
     return (
         <>
-            <ProductListCategoryTop query={collection}/>
+            <ProductListCategoryTop query={collection} setActualPage={setActualPage}/>
             <div className='product'>
                 <ProductList
                     products={product}

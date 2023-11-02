@@ -42,7 +42,7 @@ function App() {
         <NavBar setActualPage={setActualPage} openMenu={openMenu} openCart={openCart} closeMenu={closeMenu} closeCart={closeCart}/>
         <main>
           <Routes>
-            <Route path='/' Component={MainPage} />
+            <Route path='/' element={<MainPage setActualPage={setActualPage}/>} />
             <Route path='/collections/:collection/' element={<ProductListContainer actualPage={actualPage} setActualPage={setActualPage} />} />
             <Route path='/collections/:collection/:subCat' element={<ProductListContainer actualPage={actualPage} setActualPage={()=>setActualPage()}/>} />
             <Route path='/products/:title' Component={ProductView} />

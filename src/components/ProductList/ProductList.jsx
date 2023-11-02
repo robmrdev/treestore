@@ -2,18 +2,19 @@ import './ProductList.css'
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
+import urlBack from '../../assets/utils.js';
 
 const ProductList = ({ products, query, nextPage, prevPage, hasPrevPage, hasNextPage, subCatRef }) => {
     const [listProducts, setListProducts] = useState();
     const navigate = useNavigate()
-    
+
     useEffect(() => {
         fetchData();
     }, [query]);
 
     const fetchData = async () => {
         try {
-            const response = await fetch(`https://treestoreback.up.railway.app/getproducts?query=${query}`)
+            const response = await fetch(`${urlBack}getproducts?query=${query}`)
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -35,17 +36,17 @@ const ProductList = ({ products, query, nextPage, prevPage, hasPrevPage, hasNext
     if (listProducts != undefined) {
         getCategories(listProducts);
     }
-
     return (
         <>
             <div className='productAndFilters'>
                 <div className='productListFilters'>
                     <ul>
                         {query === 'accesories' ? (
-                            <li onClick={()=>{subCatRef('')}}><NavLink to={`/collections/${query}/`}>All Accesories</NavLink></li>
-                        ) : (<li onClick={()=>{navigate(`/collections/${query}/`);subCatRef('')}}>All Clothing</li>)}
+                            <li><NavLink to={`/collections/${query}/`} onClick={() => subCatRef('')}>All Accesories</NavLink></li>
+                        ) : (<li><NavLink to={`/collections/${query}/`} onClick={() => subCatRef('')}>All Clothing</NavLink></li>)}
                         {filters.map((filter) => {
-                            return <li key={filter} onClick={()=>{subCatRef(filter);const encodedSubCat = (filter).replace(/&/g, "and").replace(/ /g, "_");navigate(`/collections/${query}/${encodedSubCat}`);}}>{filter}</li>
+                            const encodedSubCat = (filter).replace(/&/g, "and").replace(/ /g, "_")
+                            return <li key={filter} onClick={() => { subCatRef(filter) }}><NavLink to={`/collections/${query}/${encodedSubCat}`}>{filter}</NavLink></li>
                         })}
                     </ul>
                 </div>

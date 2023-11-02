@@ -1,4 +1,5 @@
 import './Register.css'
+import urlBack from '../../assets/utils.js'
 
 const Register = () => {
     const handleSubmit = async e => {
@@ -13,7 +14,7 @@ const Register = () => {
         console.log("DATOS");
         console.log(datos);
 
-        const respuesta = await fetch('https://treestoreback.up.railway.app/api/auth/register', {
+        const respuesta = await fetch(`${urlBack}api/auth/register`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
