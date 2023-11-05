@@ -13,9 +13,13 @@ const SideModal = ({ isOpen, onClose }) => {
     document.cookie = 'accessTokenCookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC;'
     navigate('/login');
   };
+  console.log(`user: ${user}`)
+  console.log(`cookie:${document.cookie}`)
+  
   const handleContainerClick = (e) => {
     e.stopPropagation();
   };
+  console.log(user)
   if (!isOpen) return
   return (
     <div className='sideModal' onClick={onClose}>
