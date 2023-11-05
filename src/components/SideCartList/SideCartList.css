@@ -1,0 +1,24 @@
+.sideCartInnerList{
+    overflow-y: scroll;
+    justify-content: flex-start;
+}
+.sideCartProductCard{
+    display: flex;
+    padding: 15px 20px;
+    
+}
+.sideCartProductCard img{
+    width: 60px;
+}
+.sideCartProductInfo{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.sideCartProductInfo .bx-trash-alt{
+    margin-top: 1rem;
+    padding: 0.75rem;
+    border: 1px solid rgb(66 66 66);
+    font-size: 1.35rem;
+    color: #6d6d6d;
+}

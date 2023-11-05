@@ -31,6 +31,7 @@ const MeetTheProducts = ({setActualPage}) => {
         }
     }
 
+
     return (
         <section className='meetProductsContainer'>
             <h2>Meet the Products</h2>

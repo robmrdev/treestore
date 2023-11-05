@@ -2,14 +2,26 @@ import { NavLink } from 'react-router-dom';
 import './SideCart.css'
 import { useEffect, useState } from 'react';
 import urlBack from '../../assets/utils.js';
+import Cookies from 'js-cookie';
+import { jwtDecode } from 'jwt-decode';
+import SideCartList from '../SideCartList/SideCartList.jsx';
 
 const SideCart = ({ cartOpen, cartClose }) => {
-    const [user, setUser] = useState()
     const [product, setProduct] = useState()
-    const [accessToken, setAccessToken] = useState(localStorage.getItem('access_token'))
+    const [itemsDeleted, setItemsDeleted] = useState(0);
+    const [cartSummary, setCartSummary] = useState({ total: 0, quantity: 0 });
+
+
     useEffect(() => {
         fetchData();
     }, []);
+    let user = null
+    let cart
+
+    if (Cookies.get('accessTokenCookie')) user = jwtDecode(Cookies.get('accessTokenCookie')).user
+    if (user != null) {
+        cart = user.carts[0].cart
+    }
 
     const fetchData = async () => {
         try {
@@ -26,17 +38,31 @@ const SideCart = ({ cartOpen, cartClose }) => {
 
     const handleContainerClick = (e) => {
         e.stopPropagation();
+    };const updateSideCartList = () => {
+        setItemsDeleted(itemsDeleted + 1);
     };
+    useEffect(() => {
+        setCartSummary({ total: cartSummary.total, quantity: cartSummary.quantity });
+    }, [cartSummary.total, cartSummary.quantity]);
+
+    const handleTotalChange = (total, totalQuantity) => {
+        if (total !== cartSummary.total || totalQuantity !== cartSummary.quantity) {
+            setCartSummary({ total, quantity: totalQuantity });
+        }
+    };
+    
+    console.log();
+
     if (!cartOpen) return
     return (
         <div className='sideModal cartModal' onClick={cartClose}>
             <div className='sideContainer cartContainer' onClick={handleContainerClick}>
                 <div className='sideCartTitle'>
                     <h3>Your Cart</h3>
-                    <i class='bx bx-x' onClick={cartClose}></i>
+                    <i className='bx bx-x' onClick={cartClose}></i>
                 </div>
                 <div className='sideCartDivider'></div>
-                <div className='sideCartInnerList'>
+                {(user === null || cart.products.length === 0) ? <div className='sideCartInnerListEmpty'>
                     <h4>Your cart it's empty!</h4>
                     <p>Add your favorite items to your cart.</p>
                     <div className='cartButtons'>
@@ -44,6 +70,8 @@ const SideCart = ({ cartOpen, cartClose }) => {
                         <div className='buttonGreen'><NavLink to="/collections/mens" onClick={cartClose}>Shop Mens's</NavLink></div>
                     </div>
                 </div>
+                    : (<SideCartList cart={cart} itemsDeleted={itemsDeleted} updateSideCartList={updateSideCartList} setCartSummary={setCartSummary} onTotalChange={handleTotalChange} />
+                    )}
                 <div className='sideCartBottom'>
                     <h5>Before You Go</h5>
                     <div className='sideCartSuggestionsContainer'>
@@ -69,11 +97,29 @@ const SideCart = ({ cartOpen, cartClose }) => {
                                     </div>
                                     <strong>QUICK ADD</strong>
                                 </div>
+
                             </>
                         ) : (<p>Cargando</p>)
                         }
                     </div>
                 </div>
+                {(user === null || cart.products.length === 0) ? <></>
+                    : (<div className='sideCartCheckoutWrapper'>
+                        <div className='sideCartDividerUp'></div>
+                        <div className='sideCartCheckout'>
+                            <div className='sideCartSubTotal'>
+                                <span>Subtotal: {cartSummary.quantity} Items</span>
+                                <span> ${cartSummary.total}.00</span>
+                            </div>
+                            <div className='checkoutButton'>
+                                CHECKOUT
+                            </div>
+                            <p>or 4 interest-free installments of ${cartSummary.total/4} by Klarna</p>
+                            <p>Your order's status</p>
+                            <div>10 trees planted</div>
+                        </div>
+                    </div>
+                    )}
             </div>
         </div>
     )

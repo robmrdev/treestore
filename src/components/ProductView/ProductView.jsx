@@ -1,11 +1,15 @@
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import Cookies from 'js-cookie';
+import { jwtDecode } from 'jwt-decode';
 import './ProductView.css'
 import urlBack from '../../assets/utils.js'
 
 const ProductView = () => {
     const { title } = useParams()
     const [product, setProduct] = useState()
+    let user = null
+    if(Cookies.get('accessTokenCookie')) user = jwtDecode(Cookies.get('accessTokenCookie')).user
     useEffect(() => {
         fetchData();
     }, []);
@@ -21,10 +25,27 @@ const ProductView = () => {
             console.error('Error:', error);
         }
     }
+    
+    
 
+    // console.log(product)
+    // const tryURL =`${urlBack}api/carts/${user.carts[0].cart._id}/products/${product._id}`
+    // console.log(tryURL)
+        
+    const handleAddToBag = async ()=>{
+        let tryURL
+        if (product != undefined &&user!=null){tryURL =`${urlBack}api/carts/${user.carts[0].cart._id}/products/${product._id}`
+        const response = await fetch(tryURL, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(),
+            credentials: 'include'
+        })}
+    }
     const [newDescription, setNewDescription] = useState('')
     const handleDescriptionChange = (event) => {
-        // Manejar cambios en el campo de descripción
         setNewDescription(event.target.value);
     }
     const handleUpdateDescription = async () => {
@@ -75,11 +96,11 @@ const ProductView = () => {
                             </span>
                         </div>
                         <span className='productViewRate'>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
+                            <i className='bx bxs-star'></i>
+                            <i className='bx bxs-star'></i>
+                            <i className='bx bxs-star'></i>
+                            <i className='bx bxs-star'></i>
+                            <i className='bx bxs-star'></i>
                         </span>
                         <div className='colorOptions'>
                             <p>Colours</p>
@@ -91,8 +112,8 @@ const ProductView = () => {
                             <p>Colour: {product.color[0]}</p>
                         </div>
                         <div className='productViewButtons'>
-                            <div className='productViewAdd'>ADD TO BAG</div>
-                            <div><i class='bx bx-heart productViewHeart' ></i></div>
+                            <div className='productViewAdd' onClick={handleAddToBag}>ADD TO BAG</div>
+                            <div><i className='bx bx-heart productViewHeart'></i></div>
                         </div>
                         <div>
                             <h4>Meet the product</h4>
@@ -100,7 +121,7 @@ const ProductView = () => {
                         </div>
 
 
-                        {/* <div className='productViewDescriptionUpdate'>
+                        <div className='productViewDescriptionUpdate'>
                             <h4>Update Description</h4>
                             <textarea
                                 rows="4"
@@ -110,7 +131,7 @@ const ProductView = () => {
                                 placeholder="Enter new description"
                             />
                             <button onClick={handleUpdateDescription}>Update Description</button>
-                        </div> */}
+                        </div>
 
 
                     </div>

@@ -7,12 +7,12 @@ const Register = () => {
         e.preventDefault()
         const formRegister = e.target;
         const datos = {
-            name: formRegister[0].value,
-            email: formRegister[1].value,
-            password: formRegister[2].value,
+            firstName: formRegister[0].value,
+            lastName: formRegister[1].value,
+            email: formRegister[2].value,
+            age: formRegister[3].value,
+            password: formRegister[4].value,
         }
-        console.log("DATOS");
-        console.log(datos);
 
         const respuesta = await fetch(`${urlBack}api/auth/register`, {
             method: 'POST',
@@ -40,11 +40,17 @@ const Register = () => {
     return (
         <section className='registerForm' onSubmit={handleSubmit}>
             <form>
-                <label htmlFor='name'>Name:</label>
-                <input type="text" name='name' id='name' required />
+                <label htmlFor='firstName'>First Name:</label>
+                <input type="text" name='firstName' id='firstName' required />
 
+                <label htmlFor='lastName'>Last Name:</label>
+                <input type="text" name='lastName' id='lastName' required />
+                
                 <label htmlFor='email'>Email:</label>
                 <input type="email" name='email' id='email' required />
+                
+                <label htmlFor='age'>Age:</label>
+                <input type="number" name='age' id='age' required />
 
                 <label htmlFor='password'>Password:</label>
                 <input type="password" name='password' id='password' required />
