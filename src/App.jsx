@@ -11,6 +11,7 @@ import SideModal from './components/SideModal/SideModal';
 import Private from './components/Private/Private';
 import SideCart from './components/sideCart/SideCart';
 import urlBack from './assets/utils';
+import Checkout from './components/Checkout/Checkout';
 
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
             <Route path='/login/' element={<LoginPage/>}/>
             <Route path='/register/' Component={Register}/>
             <Route path='/private' Component={Private}/>
+            <Route path='/checkout' Component ={Checkout}/>
           </Routes>
           {/* <AddProductForm /> */}
         </main>

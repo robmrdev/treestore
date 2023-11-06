@@ -109,7 +109,7 @@ const SideCart = ({ cartOpen, cartClose }) => {
                                 <span> ${cartSummary.total}.00</span>
                             </div>
                             <div className='checkoutButton'>
-                                CHECKOUT
+                            <NavLink to="/checkout">CHECKOUT</NavLink>
                             </div>
                             <p>or 4 interest-free installments of ${cartSummary.total/4} by Klarna</p>
                             <p>Your order's status</p>
