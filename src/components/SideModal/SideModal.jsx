@@ -8,18 +8,15 @@ const SideModal = ({ isOpen, onClose }) => {
   
   const navigate = useNavigate()
   let user = null
-  if(Cookies.get('accessTokenCookie')) user = jwtDecode(Cookies.get('accessTokenCookie')).user
+  if(localStorage.getItem('accessToken')) user = jwtDecode(localStorage.getItem('accessToken')).user
   const handleLogOut = () => {
-    document.cookie = 'accessTokenCookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC;'
+    localStorage.removeItem('accessToken');
     navigate('/login');
   };
-  console.log(`user: ${user}`)
-  console.log(`cookie:${document.cookie}`)
-  
+
   const handleContainerClick = (e) => {
     e.stopPropagation();
   };
-  console.log(user)
   if (!isOpen) return
   return (
     <div className='sideModal' onClick={onClose}>

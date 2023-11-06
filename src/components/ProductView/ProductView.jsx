@@ -9,7 +9,7 @@ const ProductView = () => {
     const { title } = useParams()
     const [product, setProduct] = useState()
     let user = null
-    if(Cookies.get('accessTokenCookie')) user = jwtDecode(Cookies.get('accessTokenCookie')).user
+    if(localStorage.getItem('accessToken')) user = jwtDecode(localStorage.getItem('accessToken')).user
     useEffect(() => {
         fetchData();
     }, []);
@@ -33,16 +33,26 @@ const ProductView = () => {
     // console.log(tryURL)
         
     const handleAddToBag = async ()=>{
+        const accessToken = localStorage.getItem('accessToken');
         let tryURL
         if (product != undefined &&user!=null){tryURL =`${urlBack}api/carts/${user.carts[0].cart._id}/products/${product._id}`
         const response = await fetch(tryURL, {
             method: 'PUT',
             headers: {
+                'Accept': 'application/json',
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
             },
             body: JSON.stringify(),
             credentials: 'include'
-        })}
+        })
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const data = await response.json()
+        localStorage.setItem('accessToken', data.payload);
+    
+    }
     }
     const [newDescription, setNewDescription] = useState('')
     const handleDescriptionChange = (event) => {
@@ -121,7 +131,7 @@ const ProductView = () => {
                         </div>
 
 
-                        <div className='productViewDescriptionUpdate'>
+                        {/* <div className='productViewDescriptionUpdate'>
                             <h4>Update Description</h4>
                             <textarea
                                 rows="4"
@@ -131,7 +141,7 @@ const ProductView = () => {
                                 placeholder="Enter new description"
                             />
                             <button onClick={handleUpdateDescription}>Update Description</button>
-                        </div>
+                        </div> */}
 
 
                     </div>

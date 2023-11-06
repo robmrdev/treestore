@@ -2,7 +2,6 @@ import { NavLink } from 'react-router-dom';
 import './SideCart.css'
 import { useEffect, useState } from 'react';
 import urlBack from '../../assets/utils.js';
-import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
 import SideCartList from '../SideCartList/SideCartList.jsx';
 
@@ -18,7 +17,7 @@ const SideCart = ({ cartOpen, cartClose }) => {
     let user = null
     let cart
 
-    if (Cookies.get('accessTokenCookie')) user = jwtDecode(Cookies.get('accessTokenCookie')).user
+    if(localStorage.getItem('accessToken')) user = jwtDecode(localStorage.getItem('accessToken')).user
     if (user != null) {
         cart = user.carts[0].cart
     }
@@ -51,7 +50,6 @@ const SideCart = ({ cartOpen, cartClose }) => {
         }
     };
     
-    console.log();
 
     if (!cartOpen) return
     return (
@@ -97,7 +95,6 @@ const SideCart = ({ cartOpen, cartClose }) => {
                                     </div>
                                     <strong>QUICK ADD</strong>
                                 </div>
-
                             </>
                         ) : (<p>Cargando</p>)
                         }

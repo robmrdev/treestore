@@ -19,17 +19,25 @@ const SideCartList = ({ cart, updateSideCartList, itemsDeleted, setCartSummary, 
             setProductDetails(details);
         };
         loadProductDetails();
-        
+
     }, [cart, itemsDeleted]);
 
 
-    
+
     const deleteItem = async (cid, id) => {
         try {
+            const accessToken = localStorage.getItem('accessToken');
+
+            if (!accessToken) {
+                console.error('No Access Token found in localStorage');
+                return;
+            }
+
             const response = await fetch(`${urlBack}api/carts/deleteProduct/${cid}/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${accessToken}`
                 },
                 body: JSON.stringify(),
                 credentials: 'include'
@@ -37,6 +45,8 @@ const SideCartList = ({ cart, updateSideCartList, itemsDeleted, setCartSummary, 
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
+            const data = await response.json()
+            localStorage.setItem('accessToken', data.payload);
             updateSideCartList();
 
         } catch (error) {

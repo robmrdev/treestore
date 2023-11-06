@@ -31,6 +31,8 @@ const LoginPage = () => {
             credentials: 'include'
         });
         if (response.ok) {
+            const data = await response.json()
+            localStorage.setItem('accessToken', data.payload);
             navigate('/');
         }
     }
