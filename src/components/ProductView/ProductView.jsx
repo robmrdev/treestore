@@ -1,6 +1,5 @@
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
 import './ProductView.css'
 import urlBack from '../../assets/utils.js'
@@ -8,11 +7,19 @@ import urlBack from '../../assets/utils.js'
 const ProductView = () => {
     const { title } = useParams()
     const [product, setProduct] = useState()
+    const initialColor = product && product.color && product.color.length > 0 ? product.color[0] : null;
+    const [actualColor, setActualColor] = useState(initialColor)
     let user = null
-    if(localStorage.getItem('accessToken')) user = jwtDecode(localStorage.getItem('accessToken')).user
+    if (localStorage.getItem('accessToken')) user = jwtDecode(localStorage.getItem('accessToken')).user
     useEffect(() => {
         fetchData();
     }, []);
+    useEffect(() => {
+        if (product && product.color && product.color.length > 0) {
+            setActualColor(product.color[0]);
+        }
+    }, [product]);
+
     const fetchData = async () => {
         try {
             const response = await fetch(`${urlBack}getProduct/${title}`)
@@ -25,35 +32,77 @@ const ProductView = () => {
             console.error('Error:', error);
         }
     }
-    
-    
 
-    // console.log(product)
-    // const tryURL =`${urlBack}api/carts/${user.carts[0].cart._id}/products/${product._id}`
-    // console.log(tryURL)
-        
-    const handleAddToBag = async ()=>{
+    // let provisionalCart;
+    // if (user === null) {
+    let provisionalCart = JSON.parse(localStorage.getItem('provisionalCart')) || {
+        products: []
+        // };
+    }
+
+    const handleAddToBag = async () => {
+        const existingProductIndex = provisionalCart.products.findIndex(p => p._id === product._id && p.color === actualColor);
+
+            if (existingProductIndex !== -1) {
+                provisionalCart.products[existingProductIndex].quantity += 1;
+            } else {
+                provisionalCart.products.push({
+                    _id: product._id,
+                    quantity: 1,
+                    price: product.price,
+                    title: product.title,
+                    color: actualColor,
+                    thumbnail: `../img/products/${product.category}${product.thumbnail[actualColor][0]}`
+                });
+            }
+            localStorage.setItem('provisionalCart', JSON.stringify(provisionalCart));
         const accessToken = localStorage.getItem('accessToken');
         let tryURL
-        if (product != undefined &&user!=null){tryURL =`${urlBack}api/carts/${user.carts[0].cart._id}/products/${product._id}`
-        const response = await fetch(tryURL, {
-            method: 'PUT',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${accessToken}`
-            },
-            body: JSON.stringify(),
-            credentials: 'include'
-        })
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
+        if (product != undefined && user != null) {
+            tryURL = `${urlBack}api/carts/${user.carts[0].cart._id}/products/${product._id}`
+            const provisionalCart = localStorage.getItem('provisionalCart');
+            if (provisionalCart) {
+                document.cookie = 'provisionalCart=' + provisionalCart + '; path=/;';
+            }
+            const response = await fetch(tryURL, {
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${accessToken}`,
+                    'Cookie': `provisionalCart=${provisionalCart}`,
+                },
+                body: JSON.stringify(),
+                credentials: 'include'
+            })
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const data = await response.json()
+            localStorage.setItem('accessToken', data.payload);
+        } else {
+            // const existingProductIndex = provisionalCart.products.findIndex(p => p._id === product._id && p.color === actualColor);
+
+            // if (existingProductIndex !== -1) {
+            //     provisionalCart.products[existingProductIndex].quantity += 1;
+            // } else {
+            //     provisionalCart.products.push({
+            //         _id: product._id,
+            //         quantity: 1,
+            //         price: product.price,
+            //         title: product.title,
+            //         color: actualColor,
+            //         thumbnail: `../img/products/${product.category}${product.thumbnail[actualColor][0]}`
+            //     });
+            // }
+            // localStorage.setItem('provisionalCart', JSON.stringify(provisionalCart));
         }
-        const data = await response.json()
-        localStorage.setItem('accessToken', data.payload);
-    
-    }
-    }
+    };
+
+
+
+
+
     const [newDescription, setNewDescription] = useState('')
     const handleDescriptionChange = (event) => {
         setNewDescription(event.target.value);
@@ -70,29 +119,20 @@ const ProductView = () => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-
-            // Vuelve a cargar los datos del producto después de la actualización
             fetchData();
         } catch (error) {
             console.error('Error:', error);
         }
     }
 
-
-
-
-
-
-    // const actualColor = product.color[0]
-    // console.log(product.thumbnail[actualColor])
     return (
 
         <div className='productViewContainer'>
             {product != undefined ? (
                 <>
                     <div className='productViewImages'>
-                        {product.thumbnail[product.color[0]].map((img) => {
-                            return <img src={`../img/products/${product.category}${img}`} alt="" key={img} />
+                        {product.thumbnail && product.thumbnail[actualColor] && product.thumbnail[actualColor].map((img) => {
+                            return <img src={`../img/products/${product.category}${img}`} alt="" key={img} />;
                         })}
                     </div>
                     <div className='productViewInfo'>
@@ -116,10 +156,10 @@ const ProductView = () => {
                             <p>Colours</p>
                             <span>
                                 {Object.entries(product.colorCode).map(([colorName, colorValue]) => (
-                                    <div className="colorSelector" style={{ [colorValue.length < 15 ? "backgroundColor" : "background"]: colorValue }} key={colorName}></div>
+                                    <div className="colorSelector" style={{ [colorValue.length < 15 ? "backgroundColor" : "background"]: colorValue }} key={colorName} onClick={() => setActualColor(colorName)}></div>
                                 ))}
                             </span>
-                            <p>Colour: {product.color[0]}</p>
+                            <p>Colour: {actualColor}</p>
                         </div>
                         <div className='productViewButtons'>
                             <div className='productViewAdd' onClick={handleAddToBag}>ADD TO BAG</div>

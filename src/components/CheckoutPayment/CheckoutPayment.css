@@ -1,0 +1,61 @@
+.checkoutContact{
+    padding: 0.85em;
+    border: 1px solid rgb(217, 217, 217);
+    border-radius: 5px;
+}
+.checkoutContact>div{
+    font-size: 15px;
+    color: rgb(152, 152, 152);
+    display: flex;
+    justify-content: space-between;
+}
+.checkoutDivider{
+    margin: 7px 0;
+    height: 1px;
+    width: 100%;
+    background-color: rgb(217, 217, 217);
+}
+.paymentWrapper{
+    border: 1px solid rgb(217, 217, 217);
+    border-radius: 5px;
+}
+.paymentOptionWrapper{
+    padding: 0 10px;
+    margin-top: 7px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.paymentOptionWrapper img{
+    padding-left: 5px;
+}
+.paymentOption{
+    display: flex;
+    align-items: center;
+}
+.paymentOption input{
+    display: none;
+}
+.paymentOption label {
+    width: 18px;
+    height: 18px;
+    border: 1px solid grey;
+    border-radius: 50%;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.paymentOption input[type="radio"]:checked + label {
+    border-width: 7px;
+    border-color: #424242;
+}
+.paymentOption p{
+    padding-left: 10px;
+}
+.creditCardInfo{
+    display: flex;
+    flex-wrap: wrap;
+}
+.billingOption{
+    padding: 0 10px;
+    margin: 10px 0;
+}

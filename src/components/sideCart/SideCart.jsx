@@ -16,12 +16,8 @@ const SideCart = ({ cartOpen, cartClose }) => {
     }, []);
     let user = null
     let cart
-
-    if(localStorage.getItem('accessToken')) user = jwtDecode(localStorage.getItem('accessToken')).user
-    if (user != null) {
-        cart = user.carts[0].cart
-    }
-
+    // console.log(localStorage.getItem('provisionalCart'))
+    if(localStorage.getItem('provisionalCart')) cart = JSON.parse(localStorage.getItem('provisionalCart'))
     const fetchData = async () => {
         try {
             const response = await fetch(`${urlBack}getproducts?query=accesories`)
@@ -49,8 +45,6 @@ const SideCart = ({ cartOpen, cartClose }) => {
             setCartSummary({ total, quantity: totalQuantity });
         }
     };
-    
-
     if (!cartOpen) return
     return (
         <div className='sideModal cartModal' onClick={cartClose}>
@@ -60,7 +54,7 @@ const SideCart = ({ cartOpen, cartClose }) => {
                     <i className='bx bx-x' onClick={cartClose}></i>
                 </div>
                 <div className='sideCartDivider'></div>
-                {(user === null || cart.products.length === 0) ? <div className='sideCartInnerListEmpty'>
+                {(cart === undefined || cart.products.length === 0) ? <div className='sideCartInnerListEmpty'>
                     <h4>Your cart it's empty!</h4>
                     <p>Add your favorite items to your cart.</p>
                     <div className='cartButtons'>
@@ -100,7 +94,7 @@ const SideCart = ({ cartOpen, cartClose }) => {
                         }
                     </div>
                 </div>
-                {(user === null || cart.products.length === 0) ? <></>
+                {(cart === undefined || cart.products.length === 0) ? <></>
                     : (<div className='sideCartCheckoutWrapper'>
                         <div className='sideCartDividerUp'></div>
                         <div className='sideCartCheckout'>

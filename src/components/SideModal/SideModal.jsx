@@ -11,6 +11,8 @@ const SideModal = ({ isOpen, onClose }) => {
   if(localStorage.getItem('accessToken')) user = jwtDecode(localStorage.getItem('accessToken')).user
   const handleLogOut = () => {
     localStorage.removeItem('accessToken');
+    localStorage.removeItem('provisionalCart');
+    document.cookie = 'provisionalCart=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     navigate('/login');
   };
 

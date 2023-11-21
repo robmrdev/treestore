@@ -22,11 +22,8 @@ const Register = () => {
             },
             body: JSON.stringify(datos)
         });
-
+        // if (respuesta.ok) console.log('Register Ok')
         const content = await respuesta.json();
-
-        console.log(content);
-
         const { access_token } = content;
 
         if (access_token) {
