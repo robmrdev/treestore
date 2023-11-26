@@ -9,9 +9,10 @@ import LoginPage from './components/LoginPage/LoginPage';
 import Register from './components/Register/Register';
 import SideModal from './components/SideModal/SideModal';
 import Private from './components/Private/Private';
-import SideCart from './components/sideCart/SideCart';
+import SideCart from './components/SideCart/SideCart';
 import urlBack from './assets/utils';
 import Checkout from './components/Checkout/Checkout';
+import newOrder from './components/newOrder/newOrder';
 
 
 function App() {
@@ -53,6 +54,7 @@ function App() {
             <Route path='/register/' Component={Register}/>
             <Route path='/private' Component={Private}/>
             <Route path='/checkout' Component ={Checkout}/>
+            <Route path='/orderCompleted' Component={newOrder}/>
           </Routes>
           {/* <AddProductForm /> */}
         </main>

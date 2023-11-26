@@ -1,6 +1,34 @@
 import './CheckoutPayment.css'
+import urlBack from '../../assets/utils'
+import { jwtDecode } from 'jwt-decode'
+import { useNavigate } from 'react-router-dom'
 
 const CheckoutPayment = ({nextStep}) => {
+    
+    const navigate = useNavigate()
+    const handleCheckout = async e => {
+
+        // e.preventDefault()
+        const cart = localStorage.getItem('provisionalCart')
+        const cartID = JSON.parse(cart)._id
+        const user = localStorage.getItem('accessToken')
+        const respuesta = await fetch(`${urlBack}api/carts/${cartID}/purchase`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(jwtDecode(user))
+        });
+        if (respuesta.ok) {
+            
+            const ticket = await respuesta.json()
+            localStorage.setItem('lastOrder', JSON.stringify(ticket.payload))
+            navigate('/orderCompleted');
+        }
+    }
+
+
     return (
 
         <div className='mainCheckout'>
@@ -88,7 +116,7 @@ const CheckoutPayment = ({nextStep}) => {
             </div>
             <div className='shippingBottom'>
                 <p onClick={nextStep}>Return to shipping</p>
-                <button type="submit">Pay now</button>
+                <button  onClick={()=> handleCheckout()}>Pay now</button>
             </div>
         </div>
     )

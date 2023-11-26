@@ -1,7 +1,9 @@
 import './Register.css'
 import urlBack from '../../assets/utils.js'
+import { useNavigate } from 'react-router-dom'
 
 const Register = () => {
+    const navigate = useNavigate()
     const handleSubmit = async e => {
 
         e.preventDefault()
@@ -22,16 +24,19 @@ const Register = () => {
             },
             body: JSON.stringify(datos)
         });
-        // if (respuesta.ok) console.log('Register Ok')
-        const content = await respuesta.json();
-        const { access_token } = content;
-
-        if (access_token) {
-            localStorage.setItem("access_token", access_token);
-            // location.href = '/private'
-        } else {
-            // location.href = '/register'
+        if (respuesta.ok) {
+            console.log('Register Ok')
+            navigate('/login');
         }
+        // const content = await respuesta.json();
+        // const { access_token } = content;
+
+        // if (access_token) {
+        //     localStorage.setItem("access_token", access_token);
+        //     // location.href = '/private'
+        // } else {
+        //     // location.href = '/register'
+        // }
     }
 
     return (
