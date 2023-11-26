@@ -116,7 +116,7 @@ const CheckoutPayment = ({nextStep}) => {
             </div>
             <div className='shippingBottom'>
                 <p onClick={nextStep}>Return to shipping</p>
-                <button  onClick={()=> handleCheckout()}>Pay now</button>
+                <button onClick={()=> handleCheckout()}>Pay now</button>
             </div>
         </div>
     )
