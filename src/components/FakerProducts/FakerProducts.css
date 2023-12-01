@@ -1,0 +1,14 @@
+
+.fakertitle{
+    text-align: center;
+    padding: 100px 0;
+}
+
+.fakercart{
+    display: flex;
+    flex-wrap: wrap;
+}
+.fakerImg{
+    width: 200px;
+    height: 200px;
+}

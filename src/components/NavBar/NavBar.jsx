@@ -47,6 +47,7 @@ const NavBar = ({setActualPage, openMenu, openCart, closeMenu, closeCart}) => {
                         <li onMouseEnter={() => handleMouseEnter('mens')} onClick={()=>handlePage('1')}><NavLink to='/collections/mens'>Mens</NavLink></li>
                         <li onMouseEnter={() => handleMouseEnter('kids')} onClick={()=>handlePage('1')}><NavLink to='/collections/kids'>Kids</NavLink></li>
                         <li onMouseEnter={() => handleMouseEnter('accesories')} onClick={()=>handlePage('1')}><NavLink to='/collections/accesories'>Accesories</NavLink></li>
+                        <li><NavLink to='/fakerProducts'>Faker Products</NavLink></li>
                     </ul>
                 </div>
                 <div onMouseEnter={handleMouseLeave}>

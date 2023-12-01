@@ -13,6 +13,7 @@ import SideCart from './components/SideCart/SideCart';
 import urlBack from './assets/utils';
 import Checkout from './components/Checkout/Checkout';
 import newOrder from './components/newOrder/newOrder';
+import FakerProducts from './components/FakerProducts/FakerProducts';
 
 
 function App() {
@@ -55,6 +56,7 @@ function App() {
             <Route path='/private' Component={Private}/>
             <Route path='/checkout' Component ={Checkout}/>
             <Route path='/orderCompleted' Component={newOrder}/>
+            <Route path='/fakerProducts'Component={FakerProducts}/>
           </Routes>
           {/* <AddProductForm /> */}
         </main>
